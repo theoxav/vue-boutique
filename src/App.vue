@@ -24,6 +24,20 @@ import Cart from '@/components/Cart/Cart.vue'
   grid-template-areas: 'header header' 'shop cart' 'footer footer';
   grid-template-columns: 75% 25%;
   grid-template-rows: 48px auto 48px;
+
+  @media (max-width: 992px) {
+    grid-template-columns: 65% 35%;
+  }
+
+  @media (max-width: 768px) {
+    grid-template-areas:
+      'header'
+      'shop'
+      'cart'
+      'footer';
+    grid-template-columns: 100%;
+    grid-template-rows: 48px auto auto 48px;
+  }
 }
 
 .header {
@@ -36,6 +50,8 @@ import Cart from '@/components/Cart/Cart.vue'
 
 .cart {
   grid-area: cart;
+  border-left: var(--border);
+  background-color: white;
 }
 
 .footer {
