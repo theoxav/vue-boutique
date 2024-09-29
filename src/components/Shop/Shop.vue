@@ -1,6 +1,9 @@
 <template>
   <div>
-    <ShopProductList :products="products" />
+    <ShopProductList
+      :products="products"
+      @add-product-to-cart="emit('add-product-to-cart', $event)"
+    />
   </div>
 </template>
 
@@ -10,6 +13,10 @@ import type { ProductType } from '@/types/Product.type'
 
 defineProps<{
   products: ProductType[]
+}>()
+
+const emit = defineEmits<{
+  (event: 'add-product-to-cart', productId: number): void
 }>()
 </script>
 

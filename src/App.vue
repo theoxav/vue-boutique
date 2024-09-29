@@ -1,8 +1,8 @@
 <template>
   <div class="app-container">
     <TheHeader class="header" />
-    <Shop class="shop" :products="products" />
-    <Cart class="cart" />
+    <Shop class="shop" :products="state.products" @add-product-to-cart="addProductToCart" />
+    <Cart class="cart" :cart="state.cart" @remove-product-from-cart="removeProductFromCart" />
     <TheFooter class="footer" />
   </div>
 </template>
@@ -16,7 +16,26 @@ import { reactive } from 'vue'
 import data from './data/products'
 import type { ProductType } from './types/Product.type'
 
-const products = reactive<ProductType[]>(data)
+const state = reactive<{
+  products: ProductType[]
+  cart: ProductType[]
+}>({
+  products: data,
+  cart: []
+})
+
+const addProductToCart = (productId: number): void => {
+  const product = state.products.find((product) => product.id === productId)
+  if (product && !state.cart.find((product) => product.id === productId)) {
+    state.cart.push({ ...product })
+  }
+}
+
+const removeProductFromCart = (productId: number): void => {
+  console.log('in remove')
+
+  state.cart = state.cart.filter((product) => product.id !== productId)
+}
 </script>
 
 <style lang="scss">
