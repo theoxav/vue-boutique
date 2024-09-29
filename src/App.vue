@@ -14,11 +14,12 @@ import Shop from '@/components/Shop/Shop.vue'
 import Cart from '@/components/Cart/Cart.vue'
 import { reactive } from 'vue'
 import data from './data/products'
-import type { ProductType } from './types/Product.type'
+import type { ProductInterface } from './interfaces/Product.interface'
+import type { ProductCartInterface } from './interfaces'
 
 const state = reactive<{
-  products: ProductType[]
-  cart: ProductType[]
+  products: ProductInterface[]
+  cart: ProductCartInterface[]
 }>({
   products: data,
   cart: []
@@ -26,15 +27,27 @@ const state = reactive<{
 
 const addProductToCart = (productId: number): void => {
   const product = state.products.find((product) => product.id === productId)
-  if (product && !state.cart.find((product) => product.id === productId)) {
-    state.cart.push({ ...product })
+  if (product) {
+    const productInCart = state.cart.find((product) => product.id === productId)
+
+    if (productInCart) {
+      productInCart.quantity++
+    } else {
+      state.cart.push({ ...product, quantity: 1 })
+    }
   }
 }
 
 const removeProductFromCart = (productId: number): void => {
-  console.log('in remove')
+  const productFromCart = state.cart.find((product) => product.id === productId)
 
-  state.cart = state.cart.filter((product) => product.id !== productId)
+  if (productFromCart) {
+    if (productFromCart.quantity === 1) {
+      state.cart = state.cart.filter((product) => product.id !== productId)
+    } else {
+      productFromCart.quantity--
+    }
+  }
 }
 </script>
 

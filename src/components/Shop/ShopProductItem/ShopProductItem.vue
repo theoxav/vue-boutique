@@ -15,10 +15,10 @@
 </template>
 
 <script setup lang="ts">
-import type { ProductType } from '@/types/Product.type'
+import type { ProductInterface } from '@/interfaces/Product.interface'
 
 defineProps<{
-  product: ProductType
+  product: ProductInterface
 }>()
 
 const emit = defineEmits<{
