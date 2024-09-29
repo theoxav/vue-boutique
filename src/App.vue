@@ -1,7 +1,7 @@
 <template>
   <div class="app-container">
     <TheHeader class="header" />
-    <Shop class="shop" />
+    <Shop class="shop" :products="products" />
     <Cart class="cart" />
     <TheFooter class="footer" />
   </div>
@@ -12,6 +12,11 @@ import TheHeader from '@/components/Layouts/Header/Header.vue'
 import TheFooter from '@/components/Layouts/Footer/Footer.vue'
 import Shop from '@/components/Shop/Shop.vue'
 import Cart from '@/components/Cart/Cart.vue'
+import { reactive } from 'vue'
+import data from './data/products'
+import type { ProductType } from './types/Product.type'
+
+const products = reactive<ProductType[]>(data)
 </script>
 
 <style lang="scss">
