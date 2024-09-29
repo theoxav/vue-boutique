@@ -1,0 +1,15 @@
+header {
+  background-color: var(--primary-1);
+
+  a {
+    color: var(--text-primary-color);
+    img {
+      width: 20px;
+      margin-right: 5px;
+    }
+    .logo {
+      font-weight: 700;
+      font-size: 20px;
+    }
+  }
+}
